@@ -31,13 +31,15 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Vallencius Gavriel',
+            'telephone' => '081234567890',
             'email' => 'vallencius@gmail.com',
             'password' => bcrypt('testing12345'),
             'admin' => true,
         ]);
 
         User::create([
-            'name' => 'Bonifasius Bagaspati',
+            'name' => 'Bonifasius Ariesto Adrian Finantyo',
+            'telephone' => '082114188134',
             'email' => 'bonbon@gmail.com',
             'password' => bcrypt('testing12345'),
             'admin' => false,

@@ -17,12 +17,13 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// }); 
 
 Route::get("/", function (Request $request) {
     return response()->json([
+        "status" => "success",
         "message" => "Welcome to the API!"
     ], Response::HTTP_OK);
 });
@@ -30,4 +31,12 @@ Route::get("/", function (Request $request) {
 Route::controller(AuthController::class)->group(function(){
     Route::post('/user/login', 'login');
     Route::post('/user/register', 'register');
+});
+
+Route::middleware('auth:sanctum')->post('/user/logout', [AuthController::class, 'logout']);
+
+Route::middleware('auth:sanctum')->controller(CircleController::class)->group(function(){
+    Route::post('/circle/create', 'create');
+    // Route::post('/circle/join', 'join');
+    // Route::post('/circle/leave', 'leave');
 });

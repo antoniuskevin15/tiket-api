@@ -11,16 +11,34 @@ use Throwable;
 class AuthController extends Controller {
 
     public function login(Request $request){
+        try {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+        } catch (Throwable $error) {
+            return response()->json([
+                'status' => "error",
+                'message' => 'Authentication failed',
+                'error' => $error->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $user = User::where('email', $request->email)->get()->first();
         if(!$user || Hash::check($request->passowrd, $user->password)){
             return response()->json([
-                'message' => 'Invalid credentials!'
-            ], Response::HTTP_NOT_ACCEPTABLE);
+                "status" => "error",
+                "message" => "Invalid credentials"
+            ], Response::HTTP_UNAUTHORIZED);
         }
+        
         $token = $user->createToken("loginToken")->plainTextToken;
         return response()->json([
             'user' => $user,
-            'loginToken' => $token
+            'token' => [
+                'type' => 'Bearer',
+                'value' => $token
+            ]
         ], Response::HTTP_OK);
     }
 
@@ -31,29 +49,40 @@ class AuthController extends Controller {
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
             ]);
-                        
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'admin' => false,
-            ]);
-
-            $token = $user->createToken("loginToken")->plainTextToken;
-            return response()->json([
-                'scucess' => true,
-                'message' => 'Registration successful!',
-                'token' => $token,
-                'user' => $user,
-                $request->all(),
-            ], Response::HTTP_OK);
-
         } catch (Throwable $error) {
             return response()->json([
-                'scucess' => false,
+                'status' => "error",
                 'message' => 'Registration failed!',
                 'error' => $error->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
+        
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'admin' => false,
+        ]);
+
+        $token = $user->createToken("loginToken")->plainTextToken;
+        
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Registration successful!',
+            'token' => $token,
+            'user' => $user,
+            $request->all(),
+        ], Response::HTTP_OK);
+    }
+
+    public function logout(Request $request){
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+        
+        return response()->json([
+            'user' => $user,
+            'status' => 'success',
+            'message' => 'Logged out successfully',
+        ], Response::HTTP_OK);
     }
 }
