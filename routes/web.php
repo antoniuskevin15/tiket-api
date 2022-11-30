@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Circle;
+use App\Models\Package;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
-//     return dd(Circle::all()->first()->users);
-//     //return dd(User::all()->first()->circles);
+//     // return dd(Circle::all()->first()->users);
+//     // return dd(Package::all()->last()->user);
+//     return dd(User::where('id', 4)->get()->first()->packages);
 // });

@@ -13,7 +13,13 @@ class Circle extends Model
         'id',
     ];
 
+    //Punya user siapa aja
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class, 'circle_id');
+    }
+
+    //Circle ini owner nya siapa
+    public function owner(){
+        return $this->belongsTo(User::class);
     }
 }

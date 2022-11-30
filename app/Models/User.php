@@ -40,7 +40,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function circles(){
-        return $this->belongsToMany(Circle::class);
+    //Masuk circle mana
+    public function circle(){
+        return $this->belongsTo(Circle::class, 'circle_id');
+    }
+
+    //Punya circle apa, buat admin
+    public function owns(){
+        return $this->hasOne(Circle::class, 'owner_id');
+    }
+    
+    //Punya paket apa aja
+    public function packages(){
+        return $this->hasMany(Package::class, 'user_id');
     }
 }

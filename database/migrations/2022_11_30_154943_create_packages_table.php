@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('circle_user', function (Blueprint $table) {
-            $table->foreignId('circle_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+        Schema::create('packages', function (Blueprint $table) {
+            $table->id();
+            $table->string('sender');
+            $table->string('expedition');
+            $table->string('resi');
+            $table->string('nomorKamar');
+            $table->string('photoURL');
+            $table->foreignId('user_id');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('circle_user');
+        Schema::dropIfExists('packages');
     }
 };
