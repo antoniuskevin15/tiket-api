@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CircleController;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [CircleController::class, 'login']);
+Route::get("/", function (Request $request) {
+    return response()->json([
+        "message" => "Welcome to the API!"
+    ], Response::HTTP_OK);
+});
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/user/login', 'login');
+    Route::post('/user/register', 'register');
+});

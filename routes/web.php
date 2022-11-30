@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return dd(Circle::all()->first()->users);
-    //return dd(User::all()->first()->circles);
-});
+// Route::get('/', function () {
+//     return dd(Circle::all()->first()->users);
+//     //return dd(User::all()->first()->circles);
+// });
