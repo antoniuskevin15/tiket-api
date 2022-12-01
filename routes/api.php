@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CircleController;
+use App\Http\Controllers\PackageController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,8 @@ Route::middleware('auth:sanctum')->controller(CircleController::class)->group(fu
     Route::post('/circle/create', 'create');
     // Route::post('/circle/join', 'join');
     // Route::post('/circle/leave', 'leave');
+});
+
+Route::middleware('auth:sanctum')->controller(PackageController::class)->group(function(){
+    Route::post('/package/create', 'create');
 });
