@@ -37,6 +37,8 @@ Route::controller(AuthController::class)->group(function(){
 Route::middleware('auth:sanctum')->post('/user/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->controller(CircleController::class)->group(function(){
+    Route::get('/circle', 'getAllCircles');
+    Route::get('/circle/{id}', 'getCircleById');
     Route::post('/circle/create', 'create');
     // Route::post('/circle/join', 'join');
     // Route::post('/circle/leave', 'leave');
