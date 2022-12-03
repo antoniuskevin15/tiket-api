@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Circle;
 use App\Models\Package;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -18,6 +19,23 @@ class PackageController extends Controller {
                 'total' => $packages->count(),
                 'data' => $packages
             ]
+        ], Response::HTTP_OK);
+    }
+
+    public function getPackagesByCircle($id) {
+        $users = Circle::where('id', $id)->first()->users;
+        $i = 0;
+        $packages = Package::where('user_id', null)->get();
+        foreach($users as $user){
+            $i++;
+            $package = Package::where('user_id', $user->id)->get();
+            $packages = $packages->merge($package);
+        }
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'All packages',
+            'packages' => $packages
         ], Response::HTTP_OK);
     }
 
