@@ -28,9 +28,10 @@ class PackageController extends Controller {
                 'expedition' => 'required',
                 'resi' => 'required',
                 'nomorKamar' => 'required',
-                'photoURL' => 'required',
+                'photoURL' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'user_id' => 'required'
             ]);
+            $image_path = $request->file('photoURL')->store('photoURL', 'public');
         } catch(Throwable $error){
             return response()->json([
                 'status' => "error",
@@ -44,7 +45,7 @@ class PackageController extends Controller {
             'expedition' => $request->expedition,
             'resi' => $request->resi,
             'nomorKamar' => $request->nomorKamar,
-            'photoURL' => $request->photoURL,
+            'photoURL' => $image_path,
             'user_id' => $request->user_id
         ]);
 
