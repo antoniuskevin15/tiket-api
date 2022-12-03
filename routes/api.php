@@ -41,10 +41,11 @@ Route::middleware('auth:sanctum')->controller(CircleController::class)->group(fu
     Route::get('/circle/{id}', 'getCircleById');
     Route::post('/circle/create', 'create');
     Route::post('/circle/join', 'join');
-    Route::put('/circle/leave', 'leave');
+    Route::post('/circle/leave', 'leave');
 });
 
 Route::middleware('auth:sanctum')->controller(PackageController::class)->group(function(){
     Route::get('/package', 'getAllPackages');
     Route::post('/package/create', 'create');
+    Route::post('/package/toggle', 'toggleIsTaken');
 });

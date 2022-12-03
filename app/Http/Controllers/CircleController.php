@@ -29,14 +29,11 @@ class CircleController extends Controller {
 
     public function getCircleById($id) {
         $circle = Circle::with('users')->find($id);
-        $packages = Package::with('user')->get();
         $circle->owner = $circle->owner()->get()->first();
-        $circle->packages = $packages;
         return response()->json([
             "status" => "success",
             "message" => "Circle by id",
             "data" => $circle,
-            "packages" => $packages
         ], Response::HTTP_OK);
     }
     
@@ -55,10 +52,13 @@ class CircleController extends Controller {
             ], Response::HTTP_BAD_REQUEST);
         }
 
+        $owner = $request->user();
+
         $circle = Circle::create([
             'name' => $request->name,
             'description' => $request->description,
             'address' => $request->address,
+            'owner_id' => $owner->id
         ]);
 
         $circle->owner = $circle->owner()->get()->first();
