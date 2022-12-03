@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->controller(CircleController::class)->group(fu
 
 Route::middleware('auth:sanctum')->controller(PackageController::class)->group(function(){
     Route::get('/package', 'getAllPackages');
+    Route::get('/package/{id}', 'getPackageByCircle');
     Route::post('/package/create', 'create');
     Route::post('/package/toggle', 'toggleIsTaken');
 });

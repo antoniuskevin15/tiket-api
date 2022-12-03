@@ -43,12 +43,12 @@ class PackageController extends Controller {
         $package = Package::create([
             'sender' => $request->sender,
             'expedition' => $request->expedition,
-            'receiptNumber' => $request->resi,
-            'roomNumber' => $request->nomorKamar,
-            'photoURL' => $image_path,
+            'receiptNumber' => $request->receiptNumber,
+            'roomNumber' => $request->roomNumber,
+            'photoPath' => $image_path,
             'user_id' => $request->user_id
         ]);
-
+            
         return response()->json([
             'status' => 'success',
             'message' => 'Package created successfully',
