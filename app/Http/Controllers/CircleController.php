@@ -13,7 +13,7 @@ use Throwable;
 class CircleController extends Controller {
 
     public function getAllCircles() {
-        $circle = Circle::with('users')->get();
+        $circle = Circle::with(['users','users.packages'])->get();
         foreach ($circle as $c) {
             $c->owner = $c->owner()->get()->first();
         }
