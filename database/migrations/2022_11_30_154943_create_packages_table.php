@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('sender');
             $table->string('expedition');
-            $table->string('resi');
-            $table->string('nomorKamar');
-            $table->string('photoURL');
+            $table->string('receiptNumber');
+            $table->string('roomNumber');
+            $table->string('photoPath');
+            $table->boolean('isTaken')->default(false);
             $table->foreignId('user_id');
             $table->timestamps();
         });

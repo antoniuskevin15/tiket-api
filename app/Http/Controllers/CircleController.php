@@ -7,25 +7,36 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Circle;
+use App\Models\Package;
 use Throwable;
 
 class CircleController extends Controller {
 
     public function getAllCircles() {
-        $circle = Circle::with('users', 'users.packages')->get();
+        $circle = Circle::with('users')->get();
+        foreach ($circle as $c) {
+            $c->owner = $c->owner()->get()->first();
+        }
         return response()->json([
             "status" => "success",
             "message" => "All circles",
-            "data" => $circle
+            "circles" => [
+                "total" => $circle->count(),
+                "data" => $circle
+            ]
         ], Response::HTTP_OK);
     }
 
     public function getCircleById($id) {
-        $circle = Circle::with('users', 'users.packages')->find($id);
+        $circle = Circle::with('users')->find($id);
+        $packages = Package::with('user')->get();
+        $circle->owner = $circle->owner()->get()->first();
+        $circle->packages = $packages;
         return response()->json([
             "status" => "success",
             "message" => "Circle by id",
-            "data" => $circle
+            "data" => $circle,
+            "packages" => $packages
         ], Response::HTTP_OK);
     }
     
@@ -50,18 +61,24 @@ class CircleController extends Controller {
             'address' => $request->address,
         ]);
 
+        $circle->owner = $circle->owner()->get()->first();
+        
+        $user = $request->user();
+        $user->update([
+            'circle_id' => $circle->id
+        ]);
+
         return response()->json([
             'status' => 'success',
             'message' => 'Circle created successfully',
-            'circle' => $circle,
+            'data' => $circle
         ], Response::HTTP_OK);
     }
 
-    public function addUser(Request $request) {
+    public function join(Request $request) {
         try {
             $request->validate([
-                'circle_id' => 'required|exists:circles,id',
-                'user_id' => 'required|exists:users,id',
+                'circleId' => 'required|exists:circles,id',
             ]);
         } catch(Throwable $error){
             return response()->json([
@@ -70,16 +87,50 @@ class CircleController extends Controller {
                 'error' => $error->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
+        
+        $user = $request->user();
 
-        $circle = Circle::find($request->circle_id);
-        $user = User::find($request->user_id);
-
-        $circle->users()->attach($user);
+        if($user->circle_id != null){
+            return response()->json([
+                'status' => "error",
+                'message' => 'User already in a circle',
+            ], Response::HTTP_BAD_REQUEST);
+        } else if($user->admin_id){
+            return response()->json([
+                'status' => "error",
+                'message' => 'User is an admin',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        
+        $user->update([
+            'circle_id' => $request->circleId,
+        ]);
 
         return response()->json([
             'status' => 'success',
             'message' => 'User added successfully',
-            'circle' => $circle,
+            'data' => $user,
+        ], Response::HTTP_OK);
+    }
+
+    public function leave(Request $request){
+        $user = $request->user();
+
+        if($user->circle_id == null){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User is not in any circle',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        
+        $user->update([
+            'circle_id' => null,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User removed successfully',
+            'data' => $user,
         ], Response::HTTP_OK);
     }
 

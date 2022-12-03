@@ -7,8 +7,20 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Throwable;
 
-class PackageController extends Controller
-{
+class PackageController extends Controller {
+
+    public function getAllPackages() {
+        $packages = Package::with('user')->get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'All packages',
+            'packages' => [
+                'total' => $packages->count(),
+                'data' => $packages
+            ]
+        ], Response::HTTP_OK);
+    }
+
     public function create(Request $request){
         try {
             $request->validate([

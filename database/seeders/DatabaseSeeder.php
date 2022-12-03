@@ -44,8 +44,8 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Bonifasius Ariesto Adrian Finantyo',
             'telephone' => '082114188134',
-            'email' => 'bonbon@gmail.com',
-            'password' => bcrypt('testing12345'),
+            'email' => 'adrianfinantyo@gmail.com',
+            'password' => bcrypt('adrian12345'),
             'admin' => false,
             'circle_id' => 1
         ]);
@@ -71,27 +71,27 @@ class DatabaseSeeder extends Seeder
         Package::create([
             'sender' => 'Pak Ali',
             'expedition' => 'Si Capit',
-            'resi' => 'TGR08126666',
-            'nomorKamar' => '308',
-            'photoURL' => 'iniURL/ini.png',
+            'receiptNumber' => 'TGR08126666',
+            'roomNumber' => '308',
+            'photoPath' => 'ini.png',
             'user_id' => 2
         ]);
 
         Package::create([
             'sender' => 'Bu Mamat',
             'expedition' => 'JANE',
-            'resi' => 'TGR08111126666',
-            'nomorKamar' => '202',
-            'photoURL' => 'iniURL/ini.png',
+            'receiptNumber' => 'TGR08111126666',
+            'roomNumber' => '202',
+            'photoPath' => 'ini.png',
             'user_id' => 4
         ]);
 
         Package::create([
             'sender' => 'Pak Erte',
             'expedition' => 'JENTE',
-            'resi' => 'TGR08331126666',
-            'nomorKamar' => '202',
-            'photoURL' => 'iniURL/ini.png',
+            'receiptNumber' => 'TGR08331126666',
+            'roomNumber' => '202',
+            'photoPath' => 'ini.png',
             'user_id' => 4
         ]);
     }

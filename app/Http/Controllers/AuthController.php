@@ -48,7 +48,7 @@ class AuthController extends Controller {
                 'name' => 'required|max:255',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
-                'telephone' => 'required',
+                'telephone' => 'required|unique:users,telephone',
             ]);
         } catch (Throwable $error) {
             return response()->json([
@@ -60,9 +60,9 @@ class AuthController extends Controller {
         
         $user = User::create([
             'name' => $request->name,
+            'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'telephone' => $request->phone,
             'admin' => false,
         ]);
 
@@ -71,9 +71,11 @@ class AuthController extends Controller {
         return response()->json([
             'status' => 'error',
             'message' => 'Registration successful!',
-            'token' => $token,
+            'token' => [
+                'type' => 'Bearer',
+                'value' => $token
+            ],
             'user' => $user,
-            $request->all(),
         ], Response::HTTP_OK);
     }
 
