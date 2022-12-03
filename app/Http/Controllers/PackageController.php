@@ -26,12 +26,12 @@ class PackageController extends Controller {
             $request->validate([
                 'sender' => 'required',
                 'expedition' => 'required',
-                'resi' => 'required',
-                'nomorKamar' => 'required',
-                'photoURL' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                'receiptNumber' => 'required',
+                'roomNumber' => 'required',
+                'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'user_id' => 'required'
             ]);
-            $image_path = $request->file('photoURL')->store('photoURL', 'public');
+            $image_path = $request->file('photo')->store('photo', 'public');
         } catch(Throwable $error){
             return response()->json([
                 'status' => "error",
@@ -43,8 +43,8 @@ class PackageController extends Controller {
         $package = Package::create([
             'sender' => $request->sender,
             'expedition' => $request->expedition,
-            'resi' => $request->resi,
-            'nomorKamar' => $request->nomorKamar,
+            'receiptNumber' => $request->resi,
+            'roomNumber' => $request->nomorKamar,
             'photoURL' => $image_path,
             'user_id' => $request->user_id
         ]);
