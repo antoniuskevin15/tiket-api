@@ -39,6 +39,15 @@ class PackageController extends Controller {
         ], Response::HTTP_OK);
     }
 
+    public function getPackagesByUser($id) {
+        $packages = Package::where('user_id', $id)->get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'All packages',
+            'packages' => $packages
+        ], Response::HTTP_OK);
+    }
+
     public function create(Request $request){
         try {
             $request->validate([
