@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Tower A No. 26',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget aliquam felis. Mauris varius posuere justo et tristique. Quisque risus felis, pulvinar vel augue in, suscipit dignissim metus. Cras euismod nunc nec sapien pretium viverra. Quisque rhoncus consectetur arcu quis dictum. Etiam libero tortor, imperdiet vel ullamcorper id, finibus eget purus. Sed eget diam non enim pellentesque ultrices sed et urna. Praesent a leo eget lacus egestas malesuada. Aenean vel consequat lorem. Nullam sed mauris non justo vehicula volutpat. Vestibulum ut porta ipsum.',
             'owner_id' => 1,
+            'photoURL' => 'https://www.summareconbekasi.com/public/images/gallery/article/14000/mtown-fc3.jpghttps://www.summareconbekasi.com/public/images/gallery/article/14000/mtown-fc3.jpg'
         ]);
 
         Circle::create([
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Jalan ABC no. 1',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget aliquam felis. Mauris varius posuere justo et tristique. Quisque risus felis, pulvinar vel augue in, suscipit dignissim metus. Cras euismod nunc nec sapien pretium viverra. Quisque rhoncus consectetur arcu quis dictum. Etiam libero tortor, imperdiet vel ullamcorper id, finibus eget purus. Sed eget diam non enim pellentesque ultrices sed et urna. Praesent a leo eget lacus egestas malesuada. Aenean vel consequat lorem. Nullam sed mauris non justo vehicula volutpat. Vestibulum ut porta ipsum.',
             'owner_id' => 3,
+            'photoURL' => 'https://www.summareconbekasi.com/public/images/gallery/article/14000/mtown-fc3.jpghttps://www.summareconbekasi.com/public/images/gallery/article/14000/mtown-fc3.jpg'
         ]);
 
         User::create([

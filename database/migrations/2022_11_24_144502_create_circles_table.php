@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('address');
             $table->foreignId('owner_id');
+            $table->string('photoURL');
             $table->timestamps();
         });
     }

@@ -43,7 +43,9 @@ class CircleController extends Controller {
                 'name' => 'required|max:255|unique:circles,name',
                 'description' => 'required',
                 'address' => 'required',
+                'photo' => 'required',
             ]);
+            $image_path = $request->file('photo')->store('circle', 'public');
         } catch(Throwable $error){
             return response()->json([
                 'status' => "error",
@@ -58,13 +60,15 @@ class CircleController extends Controller {
             'name' => $request->name,
             'description' => $request->description,
             'address' => $request->address,
-            'owner_id' => $owner->id
+            'owner_id' => $owner->id,
+            'photoURL' => $image_path
         ]);
 
         $circle->owner = $circle->owner()->get()->first();
         
         $user = $request->user();
         $user->update([
+            'admin' => 1,
             'circle_id' => $circle->id
         ]);
 
