@@ -21,6 +21,15 @@ class PackageController extends Controller {
             ]
         ], Response::HTTP_OK);
     }
+    
+    public function getPackageById($id) {
+        $package = Package::where("id", $id)->get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'All packages',
+            'packages' => $package
+        ], Response::HTTP_OK);
+    }
 
     public function getPackagesByCircle($id) {
         $users = Circle::where('id', $id)->first()->users;
