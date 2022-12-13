@@ -92,7 +92,7 @@ class CircleController extends Controller {
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        $circle = Circle::where('name', $request['nama'])->first()->get();
+        $circle = Circle::where('name', $request['nama'])->first();
         
         $user = $request->user();
 
