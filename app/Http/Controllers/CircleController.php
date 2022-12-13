@@ -82,7 +82,7 @@ class CircleController extends Controller {
     public function join(Request $request) {
         try {
             $request->validate([
-                'circleId' => 'required|exists:circles,id',
+                'name' => 'required|exists:circles,name',
             ]);
         } catch(Throwable $error){
             return response()->json([
@@ -91,6 +91,10 @@ class CircleController extends Controller {
                 'error' => $error->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
+
+        $circle = Circle::where('name', $request['nama'])->first()->get();
+
+        return dd($circle);
         
         $user = $request->user();
 
@@ -107,7 +111,7 @@ class CircleController extends Controller {
         }
         
         $user->update([
-            'circle_id' => $request->circleId,
+            'circle_id' => $circle->id,
         ]);
 
         return response()->json([
