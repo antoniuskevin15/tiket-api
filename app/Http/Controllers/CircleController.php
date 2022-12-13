@@ -93,8 +93,6 @@ class CircleController extends Controller {
         }
 
         $circle = Circle::where('name', $request['nama'])->first()->get();
-
-        return dd($circle);
         
         $user = $request->user();
 
