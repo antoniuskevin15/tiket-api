@@ -5,13 +5,13 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: tiket.vallencius.my.id
-        username: main-action@vallencius.my.id
-        password: n]os4Nb~NVBp
-        server-dir: /laravelTiket/
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: tiket.adrianfinantyo.com
+          username: tiketftp@adrianfinantyo.com
+          password: B+~rB{O;nB3(H0Xv*$
+          server-dir: /tiket-laravel/
