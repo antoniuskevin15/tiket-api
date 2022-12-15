@@ -14,4 +14,3 @@ jobs:
           server: ftp.adrianfinantyo.com
           username: tiketftp@adrianfinantyo.com
           password: B+~rB{O;nB3(H0Xv*$
-          server-dir: /tiket-laravel/
