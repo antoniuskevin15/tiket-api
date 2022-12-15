@@ -67,7 +67,7 @@ class PackageController extends Controller {
                 'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'user_id' => 'required'
             ]);
-            $image_path = $request->file('photo')->store('photo', 'public');
+            $image_path = $request->file('photo')->store('packages', 'public');
         } catch(Throwable $error){
             return response()->json([
                 'status' => "error",

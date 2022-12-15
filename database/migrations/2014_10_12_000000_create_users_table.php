@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('telephone')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('photoPath');
             $table->boolean('admin');
             $table->foreignId('circle_id')->nullable();
             $table->timestamps();

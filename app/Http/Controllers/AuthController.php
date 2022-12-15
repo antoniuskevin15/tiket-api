@@ -50,6 +50,7 @@ class AuthController extends Controller {
                 'password' => 'required',
                 'telephone' => 'required|unique:users,telephone',
             ]);
+            $image_path = $request->file('photo')->store('avatars', 'public');
         } catch (Throwable $error) {
             return response()->json([
                 'status' => "error",
@@ -63,6 +64,7 @@ class AuthController extends Controller {
             'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'photoPath' => $image_path,
             'admin' => false,
         ]);
 

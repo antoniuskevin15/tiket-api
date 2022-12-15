@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             'telephone' => '081234567890',
             'email' => 'vallencius@gmail.com',
             'password' => bcrypt('testing12345'),
+            'photoPath' => 'ini.png',
             'admin' => true,
             'circle_id' => 1
         ]);
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'telephone' => '082114188134',
             'email' => 'adrianfinantyo@gmail.com',
             'password' => bcrypt('adrian12345'),
+            'photoPath' => 'ini.png',
             'admin' => false,
             'circle_id' => 1
         ]);
@@ -57,6 +59,7 @@ class DatabaseSeeder extends Seeder
             'telephone' => '081223111444',
             'email' => 'tonski@gmail.com',
             'password' => bcrypt('testing12345'),
+            'photoPath' => 'ini.png',
             'admin' => true,
             'circle_id' => 2
         ]);
@@ -66,6 +69,7 @@ class DatabaseSeeder extends Seeder
             'telephone' => '082114188664',
             'email' => 'wawa@gmail.com',
             'password' => bcrypt('testing12345'),
+            'photoPath' => 'ini.png',
             'admin' => false,
             'circle_id' => 2
         ]);

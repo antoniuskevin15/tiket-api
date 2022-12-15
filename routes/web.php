@@ -21,3 +21,8 @@ use Illuminate\Support\Facades\Route;
 //     // return dd(Package::all()->last()->user);
 //     return dd(User::where('id', 4)->get()->first()->packages);
 // });
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+    return 'Storage directory linked';
+});
