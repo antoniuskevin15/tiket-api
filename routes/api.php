@@ -23,35 +23,34 @@ use App\Http\Middleware\Cors;
 //     return $request->user();
 // }); 
 
-Route::middleware(Cors::class)->group(function () {
-    Route::get("/", function (Request $request) {
-        return response()->json([
-            "status" => "success",
-            "message" => "Welcome to the API!"
-        ], Response::HTTP_OK);
-    });
+Route::get("/", function (Request $request) {
+    return response()->json([
+        "status" => "success",
+        "message" => "Welcome to the API!"
+    ], Response::HTTP_OK);
+});
+
     
-    Route::controller(AuthController::class)->group(function(){
-        Route::post('/user/login', 'login');
-        Route::post('/user/register', 'register');
-    });
-    
-    Route::middleware('auth:sanctum')->post('/user/logout', [AuthController::class, 'logout']);
-    
-    Route::middleware('auth:sanctum')->controller(CircleController::class)->group(function(){
-        Route::get('/circle', 'getAllCircles');
-        Route::get('/circle/{id}', 'getCircleById');
-        Route::post('/circle/create', 'create');
-        Route::post('/circle/join', 'join');
-        Route::post('/circle/leave', 'leave');
-    });
-    
-    Route::middleware('auth:sanctum')->controller(PackageController::class)->group(function(){
-        Route::get('/package', 'getAllPackages');
-        Route::get('/package/{id}', 'getPackageById');
-        Route::get('/package/circle/{id}', 'getPackagesByCircle');
-        Route::get('/package/user/{id}', 'getPackagesByUser');
-        Route::post('/package/create', 'create');
-        Route::post('/package/toggle', 'toggleIsTaken');
-    });
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/user/login', 'login');
+    Route::post('/user/register', 'register');
+});
+
+Route::middleware('auth:sanctum')->post('/user/logout', [AuthController::class, 'logout']);
+
+Route::middleware('auth:sanctum')->controller(CircleController::class)->group(function(){
+    Route::get('/circle', 'getAllCircles');
+    Route::get('/circle/{id}', 'getCircleById');
+    Route::post('/circle/create', 'create');
+    Route::post('/circle/join', 'join');
+    Route::post('/circle/leave', 'leave');
+});
+
+Route::middleware('auth:sanctum')->controller(PackageController::class)->group(function(){
+    Route::get('/package', 'getAllPackages');
+    Route::get('/package/{id}', 'getPackageById');
+    Route::get('/package/circle/{id}', 'getPackagesByCircle');
+    Route::get('/package/user/{id}', 'getPackagesByUser');
+    Route::post('/package/create', 'create');
+    Route::post('/package/toggle', 'toggleIsTaken');
 });
