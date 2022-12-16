@@ -55,7 +55,7 @@ class AuthController extends Controller {
             return response()->json([
                 'status' => "error",
                 'message' => 'Registration failed!',
-                'error' => $error->errors() | $error->getMessage(),
+                'error' => $error->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
         
@@ -94,4 +94,13 @@ class AuthController extends Controller {
             'message' => 'Logged out successfully',
         ], Response::HTTP_OK);
     }
+
+    public function verifySession(Request $request){
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Session is valid',
+            'user' => $request->user(),
+        ], Response::HTTP_OK);
+    }
+
 }

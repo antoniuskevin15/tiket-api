@@ -29,12 +29,13 @@ Route::get("/", function (Request $request) {
         "message" => "Welcome to the API!"
     ], Response::HTTP_OK);
 });
-
     
 Route::controller(AuthController::class)->group(function(){
     Route::post('/user/login', 'login');
     Route::post('/user/register', 'register');
 });
+
+Route::get("/verify-session", [AuthController::class, 'verifySession'])->middleware("auth:sanctum");
 
 Route::middleware('auth:sanctum')->post('/user/logout', [AuthController::class, 'logout']);
 
