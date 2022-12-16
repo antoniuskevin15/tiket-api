@@ -39,7 +39,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'admin' => 'boolean',
+        'circle_id' => 'boolean',
     ];
 
     //Masuk circle mana

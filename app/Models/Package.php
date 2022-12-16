@@ -13,6 +13,10 @@ class Package extends Model
         'id',
     ];
 
+    protected $cast = [
+        'isTaken' => 'boolean',
+    ];
+
     //Punya 1 user (Yg dikirimin)
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
