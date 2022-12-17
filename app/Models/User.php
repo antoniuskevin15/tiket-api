@@ -40,7 +40,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'admin' => 'boolean',
-        'circle_id' => 'boolean',
     ];
 
     //Masuk circle mana
