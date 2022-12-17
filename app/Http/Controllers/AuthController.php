@@ -34,6 +34,8 @@ class AuthController extends Controller {
         
         $token = $user->createToken("loginToken")->plainTextToken;
         return response()->json([
+            'status' => 'success',
+            'message' => 'Authentication successful!',
             'user' => $user,
             'token' => [
                 'type' => 'Bearer',
@@ -49,8 +51,13 @@ class AuthController extends Controller {
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 'telephone' => 'required|unique:users,telephone',
+                'photo' => [
+                    'required',
+                    'image',
+                    'mimes:jpeg,png,jpg,gif,svg',
+                    'max:2048',
+                ]
             ]);
-            $image_path = $request->file('photo')->store('avatars', 'public');
         } catch (Throwable $error) {
             return response()->json([
                 'status' => "error",
@@ -58,6 +65,8 @@ class AuthController extends Controller {
                 'error' => $error->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
+
+        $image_path = $request->file('photo')->store('avatars', 'public');
         
         $user = User::create([
             'name' => $request->name,
@@ -71,7 +80,7 @@ class AuthController extends Controller {
         $token = $user->createToken("loginToken")->plainTextToken;
         
         return response()->json([
-            'status' => 'error',
+            'status' => 'success',
             'message' => 'Registration successful!',
             'token' => [
                 'type' => 'Bearer',
