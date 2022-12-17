@@ -8,6 +8,7 @@ use App\Models\Circle;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Vallencius Gavriel',
             'telephone' => '081234567890',
             'email' => 'vallencius@gmail.com',
-            'password' => bcrypt('testing12345'),
+            'password' => Hash::make('testing12345'),
             'photoPath' => 'ini.png',
             'admin' => true,
             'circle_id' => 1
@@ -48,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Bonifasius Ariesto Adrian Finantyo',
             'telephone' => '082114188134',
             'email' => 'adrianfinantyo@gmail.com',
-            'password' => bcrypt('adrian12345'),
+            'password' => Hash::make('adrian12345'),
             'photoPath' => 'ini.png',
             'admin' => false,
             'circle_id' => 1
@@ -58,7 +59,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Antonius Kevin',
             'telephone' => '081223111444',
             'email' => 'tonski@gmail.com',
-            'password' => bcrypt('testing12345'),
+            'password' => Hash::make('testing12345'),
             'photoPath' => 'ini.png',
             'admin' => true,
             'circle_id' => 2
@@ -68,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Vanness Iwata',
             'telephone' => '082114188664',
             'email' => 'wawa@gmail.com',
-            'password' => bcrypt('testing12345'),
+            'password' => Hash::make('testing12345'),
             'photoPath' => 'ini.png',
             'admin' => false,
             'circle_id' => 2
