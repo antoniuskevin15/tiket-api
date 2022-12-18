@@ -23,7 +23,7 @@ class PackageController extends Controller {
     }
     
     public function getPackageById($id) {
-        $package = Package::where("id", $id)->get();
+        $package = Package::where("id", $id)->get()->first();
         return response()->json([
             'status' => 'success',
             'message' => 'All packages',
