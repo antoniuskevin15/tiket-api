@@ -99,20 +99,30 @@ class AuthController extends Controller {
             ]);
             $image_path = $request->file('photo')->store('avatars', 'public');
 
-            User::where('id',$request->id)->update([
+            $user = User::where('id',$request->id)->update([
                 'name' => $request->name,
                 'telephone' => $request->telephone,
                 'email' => $request->email,
                 'photoPath' => $image_path,
             ]);
+            $token = $user->createToken("loginToken")->plainTextToken;
         } catch (Throwable $error) {
             return response()->json([
                 'status' => "error",
-                'message' => 'Registration failed!',
+                'message' => 'Update failed!',
                 'error' => $error->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
         
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Update successful!',
+            'token' => [
+                'type' => 'Bearer',
+                'value' => $token
+            ],
+            'user' => $user,
+        ], Response::HTTP_OK);
 
     }
 
