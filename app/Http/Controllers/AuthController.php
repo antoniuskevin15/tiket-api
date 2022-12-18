@@ -95,16 +95,24 @@ class AuthController extends Controller {
             $request->validate([
                 'name' => 'required|max:255',
                 'email' => 'required|email|unique:users,email',
-                'telephone' => 'required|unique:users,telephone',
+                'telephone' => 'required|unique:users,telephone'
             ]);
-            $image_path = $request->file('photo')->store('avatars', 'public');
-
-            $user = User::where('id',$request->id)->update([
-                'name' => $request->name,
-                'telephone' => $request->telephone,
-                'email' => $request->email,
-                'photoPath' => $image_path,
-            ]);
+            if($request['photo']){
+                $image_path = $request->file('photo')->store('avatars', 'public');
+    
+                $user = User::where('id',$request->id)->update([
+                    'name' => $request->name,
+                    'telephone' => $request->telephone,
+                    'email' => $request->email,
+                    'photoPath' => $image_path,
+                ]);
+            }else{
+                $user = User::where('id',$request->id)->update([
+                    'name' => $request->name,
+                    'telephone' => $request->telephone,
+                    'email' => $request->email,
+                ]);
+            }
             $token = $user->createToken("loginToken")->plainTextToken;
         } catch (Throwable $error) {
             return response()->json([
