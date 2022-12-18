@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Tower A No. 26',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget aliquam felis. Mauris varius posuere justo et tristique. Quisque risus felis, pulvinar vel augue in, suscipit dignissim metus. Cras euismod nunc nec sapien pretium viverra. Quisque rhoncus consectetur arcu quis dictum. Etiam libero tortor, imperdiet vel ullamcorper id, finibus eget purus. Sed eget diam non enim pellentesque ultrices sed et urna. Praesent a leo eget lacus egestas malesuada. Aenean vel consequat lorem. Nullam sed mauris non justo vehicula volutpat. Vestibulum ut porta ipsum.',
             'owner_id' => 1,
-            'photoURL' => 'circles/circle.png'
+            'photoURL' => 'circles/circle.jpg'
         ]);
 
         Circle::create([
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Jalan ABC no. 1',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget aliquam felis. Mauris varius posuere justo et tristique. Quisque risus felis, pulvinar vel augue in, suscipit dignissim metus. Cras euismod nunc nec sapien pretium viverra. Quisque rhoncus consectetur arcu quis dictum. Etiam libero tortor, imperdiet vel ullamcorper id, finibus eget purus. Sed eget diam non enim pellentesque ultrices sed et urna. Praesent a leo eget lacus egestas malesuada. Aenean vel consequat lorem. Nullam sed mauris non justo vehicula volutpat. Vestibulum ut porta ipsum.',
             'owner_id' => 3,
-            'photoURL' => 'circles/circle.png'
+            'photoURL' => 'circles/circle.jpg'
         ]);
 
         User::create([
@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
             'sender' => 'Pak Ali',
             'expedition' => 'Si Capit',
             'receiptNumber' => 'TGR08126666',
-            'photoPath' => 'packages/package.png',
+            'photoPath' => 'packages/package.jpeg',
             'user_id' => 2
         ]);
 
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
             'sender' => 'Bu Mamat',
             'expedition' => 'JANE',
             'receiptNumber' => 'TGR08111126666',
-            'photoPath' => 'packages/package.png',
+            'photoPath' => 'packages/package.jpeg',
             'user_id' => 4
         ]);
 
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
             'sender' => 'Pak Erte',
             'expedition' => 'JENTE',
             'receiptNumber' => 'TGR08331126666',
-            'photoPath' => 'packages/package.png',
+            'photoPath' => 'packages/package.jpeg',
             'user_id' => 4
         ]);
     }
