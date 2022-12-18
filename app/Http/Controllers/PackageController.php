@@ -104,14 +104,16 @@ class PackageController extends Controller {
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        $package = Package::find($request->id);
+        $package = Package::find($request->packageId)::with('user');
         
         $user = $request->user();
-        if(!$user->admin || $user->circle_id != $package->user->circle_id){
+        if(!$user->admin || $user->id != $package->user->id){
             return response()->json([
                 'status' => "error",
                 'message' => 'Package update failed!',
-                'error' => 'You are not an admin',
+                'error' => 'You are not allowed to do s',
+                'user' => $user,
+                'package' => $package,
             ], Response::HTTP_FORBIDDEN);
         }
 
