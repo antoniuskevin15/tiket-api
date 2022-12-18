@@ -45,7 +45,7 @@ class CircleController extends Controller {
                 'address' => 'required',
                 'photo' => 'required',
             ]);
-            $image_path = $request->file('photo')->store('circle', 'public');
+            $image_path = $request->file('photo')->store('circles', 'public');
         } catch(Throwable $error){
             return response()->json([
                 'status' => "error",

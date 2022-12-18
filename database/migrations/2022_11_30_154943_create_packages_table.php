@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('sender');
             $table->string('expedition');
             $table->string('receiptNumber');
-            $table->string('roomNumber');
             $table->string('photoPath');
             $table->boolean('isTaken')->default(false);
+            $table->string('status')->default('ongoing');
             $table->foreignId('user_id');
             $table->timestamps();
         });

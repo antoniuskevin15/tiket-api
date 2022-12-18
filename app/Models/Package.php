@@ -13,7 +13,7 @@ class Package extends Model
         'id',
     ];
 
-    protected $cast = [
+    protected $casts = [
         'isTaken' => 'boolean',
     ];
 

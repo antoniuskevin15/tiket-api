@@ -63,7 +63,6 @@ class PackageController extends Controller {
                 'sender' => 'required',
                 'expedition' => 'required',
                 'receiptNumber' => 'required',
-                'roomNumber' => 'required',
                 'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'user_id' => 'required'
             ]);
@@ -80,7 +79,6 @@ class PackageController extends Controller {
             'sender' => $request->sender,
             'expedition' => $request->expedition,
             'receiptNumber' => $request->receiptNumber,
-            'roomNumber' => $request->roomNumber,
             'photoPath' => $image_path,
             'user_id' => $request->user_id
         ]);
@@ -95,7 +93,8 @@ class PackageController extends Controller {
     public function toggleIsTaken(Request $request){
         try {
             $request->validate([
-                'packageId' => 'required',
+                'packageId' => 'required|exists:packages,id',
+                'status' => 'required|in:finished,unknown',
             ]);
         } catch(Throwable $error){
             return response()->json([
@@ -117,7 +116,8 @@ class PackageController extends Controller {
         }
 
         $package->update([
-            'isTaken' => !$package->isTaken,
+            'isTaken' => $request->status == 'unknown' ? false: true,
+            'status' => $request->status,
         ]);
 
         return response()->json([
