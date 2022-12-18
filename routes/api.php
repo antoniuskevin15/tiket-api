@@ -32,6 +32,7 @@ Route::get("/", function (Request $request) {
     
 Route::controller(AuthController::class)->group(function(){
     Route::post('/user/login', 'login');
+    Route::post('/user/edit', 'edit');
     Route::post('/user/register', 'register');
 });
 

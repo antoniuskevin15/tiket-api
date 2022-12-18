@@ -90,6 +90,32 @@ class AuthController extends Controller {
         ], Response::HTTP_OK);
     }
 
+    public function edit(Request $request){
+        try {
+            $request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|email|unique:users,email',
+                'telephone' => 'required|unique:users,telephone',
+            ]);
+            $image_path = $request->file('photo')->store('avatars', 'public');
+
+            User::where('id',$request->id)->update([
+                'name' => $request->name,
+                'telephone' => $request->telephone,
+                'email' => $request->email,
+                'photoPath' => $image_path,
+            ]);
+        } catch (Throwable $error) {
+            return response()->json([
+                'status' => "error",
+                'message' => 'Registration failed!',
+                'error' => $error->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        
+
+    }
+
     public function logout(Request $request){
         auth()->user()->tokens()->delete();
         $user = $request->user();
