@@ -124,8 +124,8 @@ class AuthController extends Controller {
                     'telephone' => $request->telephone,
                     'email' => $request->email,
                 ]);
-                $user = User::where('id',$request->id)->first();
             }
+            $user = User::where('id',$request->id)->first();
         } catch (Throwable $error) {
             return response()->json([
                 'status' => "error",
