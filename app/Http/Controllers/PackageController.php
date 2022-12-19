@@ -107,7 +107,7 @@ class PackageController extends Controller {
         $package = Package::find($request->packageId)->load('user');
         
         $user = $request->user();
-        if(!$user->admin && $user->id != $package->user->id){
+        if(!$user->admin && $user->id != $package->user->id && $package->status != 'unknown'){
             return response()->json([
                 'status' => "error",
                 'message' => 'Package update failed!',
