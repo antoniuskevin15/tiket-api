@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('testing12345'),
             'photoPath' => 'avatars/user.png',
             'admin' => true,
+            'roomNumber' => 100,
             'circle_id' => 1
         ]);
 
@@ -52,6 +53,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('adrian12345'),
             'photoPath' => 'avatars/user.png',
             'admin' => false,
+            'roomNumber' => 101,
             'circle_id' => 1
         ]);
 
@@ -62,6 +64,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('testing12345'),
             'photoPath' => 'avatars/user.png',
             'admin' => true,
+            'roomNumber' => 102,
             'circle_id' => 2
         ]);
 
@@ -72,6 +75,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('testing12345'),
             'photoPath' => 'avatars/user.png',
             'admin' => false,
+            'roomNumber' => 103,
             'circle_id' => 2
         ]);
 

@@ -83,6 +83,7 @@ class CircleController extends Controller {
         try {
             $request->validate([
                 'name' => 'required|exists:circles,name',
+                'roomNumber' => 'required',
             ]);
         } catch(Throwable $error){
             return response()->json([
@@ -110,6 +111,7 @@ class CircleController extends Controller {
         
         $user->update([
             'circle_id' => $circle->id,
+            'roomNumber' => $request['roomNumber'],
         ]);
 
         return response()->json([
@@ -131,6 +133,7 @@ class CircleController extends Controller {
         
         $user->update([
             'circle_id' => null,
+            'roomNumber' => null,
         ]);
 
         return response()->json([

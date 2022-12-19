@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('photoPath');
             $table->boolean('admin');
+            $table->string('roomNumber')->nullable()->unique();
             $table->foreignId('circle_id')->nullable();
             $table->timestamps();
         });
