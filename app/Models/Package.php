@@ -15,6 +15,7 @@ class Package extends Model
 
     protected $casts = [
         'isTaken' => 'boolean',
+        'user_id' => 'integer',
     ];
 
     //Punya 1 user (Yg dikirimin)
