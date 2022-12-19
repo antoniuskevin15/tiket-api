@@ -95,6 +95,7 @@ class PackageController extends Controller {
             $request->validate([
                 'packageId' => 'required|exists:packages,id',
                 'status' => 'required|in:finished,unknown',
+                'userId' => 'required|exists:users,id',
             ]);
         } catch(Throwable $error){
             return response()->json([
@@ -118,6 +119,7 @@ class PackageController extends Controller {
         $package->update([
             'isTaken' => $request->status == 'unknown' ? false: true,
             'status' => $request->status,
+            'user_id' => $request->userId,
         ]);
 
         return response()->json([
