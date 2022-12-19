@@ -93,38 +93,39 @@ class AuthController extends Controller {
     public function edit(Request $request){
         try {
             
-            // if($request['photo']){
-            //     $request->validate([
-            //         'name' => 'required|max:255',
-            //         'email' => 'required|email|unique:users,email',
-            //         'telephone' => 'required|unique:users,telephone',
-            //         'photo' => [
-            //             'required',
-            //             'image',
-            //             'mimes:jpeg,png,jpg,gif,svg',
-            //             'max:2048',
-            //         ]
-            //     ]);
-            //     $image_path = $request->file('photo')->store('avatars', 'public');
-    
-            //     $user = User::where('id',$request->id)->update([
-            //         'name' => $request->name,
-            //         'telephone' => $request->telephone,
-            //         'email' => $request->email,
-            //         'photoPath' => $image_path,
-            //     ]);
-            // }else{
+            if($request->photo){
                 $request->validate([
                     'name' => 'required|max:255',
-                    'email' => 'required|email|unique:users,email',
-                    'telephone' => 'required|unique:users,telephone'
+                    'email' => 'required|email',
+                    'telephone' => 'required',
+                    'photo' => [
+                        'required',
+                        'image',
+                        'mimes:jpeg,png,jpg,gif,svg',
+                        'max:2048',
+                    ]
                 ]);
+                $image_path = $request->file('photo')->store('avatars', 'public');
+    
                 $user = User::where('id',$request->id)->update([
                     'name' => $request->name,
                     'telephone' => $request->telephone,
                     'email' => $request->email,
+                    'photoPath' => $image_path,
                 ]);
-            // }
+            }else{
+                $request->validate([
+                    'name' => 'required|max:255',
+                    'email' => 'required|email',
+                    'telephone' => 'required'
+                ]);
+                User::where('id',$request->id)->update([
+                    'name' => $request->name,
+                    'telephone' => $request->telephone,
+                    'email' => $request->email,
+                ]);
+                $user = User::where('id',$request->id)->first();
+            }
         } catch (Throwable $error) {
             return response()->json([
                 'status' => "error",
