@@ -91,7 +91,6 @@ class AuthController extends Controller {
     }
 
     public function edit(Request $request){
-        return dd($request->name);
         try {
             
             // if($request['photo']){
