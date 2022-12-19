@@ -97,23 +97,22 @@ class AuthController extends Controller {
                 'email' => 'required|email|unique:users,email',
                 'telephone' => 'required|unique:users,telephone'
             ]);
-            if($request['photo']){
-                $image_path = $request->file('photo')->store('avatars', 'public');
+            // if($request['photo']){
+            //     $image_path = $request->file('photo')->store('avatars', 'public');
     
+            //     $user = User::where('id',$request->id)->update([
+            //         'name' => $request->name,
+            //         'telephone' => $request->telephone,
+            //         'email' => $request->email,
+            //         'photoPath' => $image_path,
+            //     ]);
+            // }else{
                 $user = User::where('id',$request->id)->update([
                     'name' => $request->name,
                     'telephone' => $request->telephone,
                     'email' => $request->email,
-                    'photoPath' => $image_path,
                 ]);
-            }else{
-                $user = User::where('id',$request->id)->update([
-                    'name' => $request->name,
-                    'telephone' => $request->telephone,
-                    'email' => $request->email,
-                ]);
-            }
-            $token = $user->createToken("loginToken")->plainTextToken;
+            // }
         } catch (Throwable $error) {
             return response()->json([
                 'status' => "error",
@@ -127,7 +126,7 @@ class AuthController extends Controller {
             'message' => 'Update successful!',
             'token' => [
                 'type' => 'Bearer',
-                'value' => $token
+                'value' => $request->token
             ],
             'user' => $user,
         ], Response::HTTP_OK);
