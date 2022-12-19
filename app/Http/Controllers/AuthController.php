@@ -118,7 +118,7 @@ class AuthController extends Controller {
             return response()->json([
                 'status' => "error",
                 'message' => 'Update failed!',
-                'error' => $error->errors(),
+                'error' => $error,
             ], Response::HTTP_BAD_REQUEST);
         }
         
