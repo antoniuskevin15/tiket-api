@@ -91,12 +91,14 @@ class AuthController extends Controller {
     }
 
     public function edit(Request $request){
+        return dd($request);
         try {
             $request->validate([
                 'name' => 'required|max:255',
                 'email' => 'required|email|unique:users,email',
                 'telephone' => 'required|unique:users,telephone'
             ]);
+            
             // if($request['photo']){
             //     $image_path = $request->file('photo')->store('avatars', 'public');
     
