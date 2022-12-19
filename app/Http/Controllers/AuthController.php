@@ -91,15 +91,21 @@ class AuthController extends Controller {
     }
 
     public function edit(Request $request){
-        return dd($request);
+        return dd($request->name);
         try {
-            $request->validate([
-                'name' => 'required|max:255',
-                'email' => 'required|email|unique:users,email',
-                'telephone' => 'required|unique:users,telephone'
-            ]);
             
             // if($request['photo']){
+            //     $request->validate([
+            //         'name' => 'required|max:255',
+            //         'email' => 'required|email|unique:users,email',
+            //         'telephone' => 'required|unique:users,telephone',
+            //         'photo' => [
+            //             'required',
+            //             'image',
+            //             'mimes:jpeg,png,jpg,gif,svg',
+            //             'max:2048',
+            //         ]
+            //     ]);
             //     $image_path = $request->file('photo')->store('avatars', 'public');
     
             //     $user = User::where('id',$request->id)->update([
@@ -109,6 +115,11 @@ class AuthController extends Controller {
             //         'photoPath' => $image_path,
             //     ]);
             // }else{
+                $request->validate([
+                    'name' => 'required|max:255',
+                    'email' => 'required|email|unique:users,email',
+                    'telephone' => 'required|unique:users,telephone'
+                ]);
                 $user = User::where('id',$request->id)->update([
                     'name' => $request->name,
                     'telephone' => $request->telephone,
