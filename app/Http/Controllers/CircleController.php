@@ -96,23 +96,17 @@ class CircleController extends Controller {
         $circle = Circle::where('name', $request['name'])->first();
         
         $user = $request->user();
-        if($user->admin_id != 1){
-            if($user->circle_id != null){
-                return response()->json([
-                    'status' => "error",
-                    'message' => 'User already in a circle',
-                ], Response::HTTP_BAD_REQUEST);
-            } else if($user->admin_id){
-                return response()->json([
-                    'status' => "error",
-                    'message' => 'User is an admin',
-                ], Response::HTTP_BAD_REQUEST);
-            }
-        }else{
-            $user->update([
-                'circle_id' => $circle->id,
-                'roomNumber' => $request['roomNumber'],
-            ]);
+
+        if($user->circle_id != null){
+            return response()->json([
+                'status' => "error",
+                'message' => 'User already in a circle',
+            ], Response::HTTP_BAD_REQUEST);
+        } else if($user->admin_id){
+            return response()->json([
+                'status' => "error",
+                'message' => 'User is an admin',
+            ], Response::HTTP_BAD_REQUEST);
         }
         
         $user->update([
